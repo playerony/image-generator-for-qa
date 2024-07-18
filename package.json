@@ -33,6 +33,7 @@
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
+    "clsx": "^2.1.1",
     "eslint": "^8.57.0",
     "eslint-plugin-qwik": "^1.7.1",
     "prettier": "^3.2.5",
@@ -40,5 +41,8 @@
     "undici": "*",
     "vite": "^5.2.10",
     "vite-tsconfig-paths": "^4.2.1"
+  },
+  "dependencies": {
+    "sharp": "^0.33.4"
   }
 }

@@ -1,0 +1,22 @@
+.input {
+  outline: none;
+  color: #170444;
+  border-radius: var(--radius-default);
+  transition: var(--transition-default);
+  border: 2px solid var(--color-border-default);
+  padding: var(--spacing-medium) var(--spacing-small);
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  border-color: var(--color-border-default) !important;
+  background-color: var(--color-border-default) !important;
+}
+
+.error {
+  border-color: var(--color-border-error);
+}
