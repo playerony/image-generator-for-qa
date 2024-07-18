@@ -1,5 +1,5 @@
-import { component$ } from "@builder.io/qwik";
 import { clsx } from "clsx";
+import { component$ } from "@builder.io/qwik";
 
 import type { InputProps } from "./input.types";
 
@@ -27,7 +27,7 @@ const Input = ({
       aria-describedby={describedBy}
       aria-invalid={error ? "true" : undefined}
       aria-disabled={disabled ? "true" : undefined}
-      class={clsx(className, styles.input, { [styles.error]: error })}
+      class={clsx(styles.input, { [styles.error]: error }, className)}
       {...restProps}
     />
   );

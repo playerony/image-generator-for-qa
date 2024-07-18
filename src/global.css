@@ -3,12 +3,12 @@
   --color-primary: #895cf3;
   --color-primary-dark: #170444;
   --color-background: #ffffff;
-  --color-text-primary: #170444;
   --color-border-default: #bbc0c5;
   --color-border-error: #ff4d4f;
 
   /* Border radius */
-  --radius-default: 5px;
+  --radius-medium: 5px;
+  --radius-large: 10px;
   
   /* Shadows */
   --shadow-default: 0 30px 45px  rgba(18, 8, 39, 0.2);
@@ -17,9 +17,10 @@
   --transition-default: all 0.3s ease;
   
   /* Spacings */
-  --spacing-small: 8px;
-  --spacing-medium: 16px;
-  --spacing-large: 24px;
+  --spacing-small: 10px;
+  --spacing-medium: 20px;
+  --spacing-large: 40px;
+  --spacing-xlarge: 80px;
   
   /* Fonts */
   --font-family-primary: "Poppins", sans-serif;

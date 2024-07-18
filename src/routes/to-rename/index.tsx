@@ -1,24 +1,22 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
+import Card from '../../atoms/card/card.component'
 import Input from '../../atoms/input/input.component'
 import Button from '../../atoms/button/button.component'
 
-const HomePage = component$(() => {
-  return (
-    <div>
-      <Input placeholder="xd" />
-      <Input type="number" />
-      <Input disabled />
-      <Input error />
-      <Input error disabled value="test" />
-      <Button>Click me</Button>
-      <Button disabled>Click me</Button>
-    </div>
-  );
-});
+import styles from './home.module.css'
 
-export default HomePage;
+const Home = () => (
+  <Card class={styles.container}>
+    <h1 class={styles.heading}>IMAGE</h1>
+    <h2 class={styles.subheading}>GENERATOR</h2>
+    <Input />
+    <Button>Generate</Button>
+  </Card>
+);
+
+export default component$(Home);
 
 // function limitSize(size, maximumPixels) {
 //   const { width, height } = size;

@@ -1,5 +1,5 @@
-import { component$, Slot } from "@builder.io/qwik";
 import { clsx } from "clsx";
+import { component$, Slot } from "@builder.io/qwik";
 
 import type { ButtonProps } from "./button.types";
 
@@ -16,7 +16,7 @@ const Button = ({
     id={id}
     ref={forwardRef}
     disabled={disabled}
-    class={clsx(className, styles.button)}
+    class={clsx(styles.button, className)}
     aria-disabled={disabled ? "true" : undefined}
     {...restProps}
   >

@@ -1,7 +1,8 @@
 .input {
+  width: 100%;
   outline: none;
   color: #170444;
-  border-radius: var(--radius-default);
+  border-radius: var(--radius-medium);
   transition: var(--transition-default);
   border: 2px solid var(--color-border-default);
   padding: var(--spacing-medium) var(--spacing-small);
