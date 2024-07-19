@@ -1,14 +1,10 @@
-import { component$, useStore } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
+import useImageGeneratorStore from "~/hooks/useImageGeneratorStore";
+
 const Home = component$(() => {
-  const state = useStore({
-    width: 1280,
-    height: 720,
-    outputSize: 1,
-    ratioWidth: 16,
-    ratioHeight: 9,
-  });
+  const state = useImageGeneratorStore();
 
   return (
     <div class="image-generator">

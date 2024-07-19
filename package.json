@@ -29,6 +29,7 @@
   "devDependencies": {
     "@builder.io/qwik": "^1.7.1",
     "@builder.io/qwik-city": "^1.7.1",
+    "@types/canvas-size": "^1.2.2",
     "@types/eslint": "^8.56.10",
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
@@ -39,9 +40,8 @@
     "typescript": "5.4.5",
     "undici": "*",
     "vite": "^5.2.10",
-    "vite-tsconfig-paths": "^4.2.1"
-  },
-  "dependencies": {
+    "vite-tsconfig-paths": "^4.2.1",
+    "canvas-size": "^2.0.0",
     "clsx": "^2.1.1",
     "sharp": "^0.33.4"
   }
