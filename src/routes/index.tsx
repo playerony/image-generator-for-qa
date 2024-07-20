@@ -1,7 +1,7 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
-import useImageGeneratorStore from "~/hooks/useImageGeneratorStore";
+import { useImageGeneratorStore } from "~/hooks";
 
 const Home = component$(() => {
   const state = useImageGeneratorStore();
