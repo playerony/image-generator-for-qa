@@ -1,10 +1,10 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, $ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
 import { useImageGeneratorStore } from "~/hooks";
 
 const Home = component$(() => {
-  const state = useImageGeneratorStore();
+  const { formState, onOutputSizeChange } = useImageGeneratorStore();
 
   return (
     <div class="image-generator">
@@ -18,9 +18,13 @@ const Home = component$(() => {
             Ratio Width
           </label>
           <input
+            min={0}
+            max={50}
+            step={0.01}
             type="number"
             id="ratio-width"
-            value={state.ratioWidth}
+            value={formState.ratioWidth}
+            // onBlur$={onRatioWidthChange}
             class="image-generator__input image-generator__input--ratio-width"
           />
         </div>
@@ -29,9 +33,13 @@ const Home = component$(() => {
             Ratio Height
           </label>
           <input
+            min={0}
+            max={50}
+            step={0.01}
             type="number"
             id="ratio-height"
-            value={state.ratioHeight}
+            // onBlur$={onRatioHeightChange}
+            value={formState.ratioHeight}
             class="image-generator__input image-generator__input--ratio-height"
           />
         </div>
@@ -44,7 +52,7 @@ const Home = component$(() => {
           <input
             id="width"
             type="number"
-            value={state.width}
+            value={formState.width}
             class="image-generator__input image-generator__input--width"
           />
         </div>
@@ -55,7 +63,7 @@ const Home = component$(() => {
           <input
             id="height"
             type="number"
-            value={state.height}
+            value={formState.height}
             class="image-generator__input image-generator__input--height"
           />
         </div>
@@ -67,7 +75,8 @@ const Home = component$(() => {
         <input
           type="number"
           id="output-size"
-          value={state.outputSize}
+          value={formState.outputSize}
+          onBlur$={onOutputSizeChange}
           class="image-generator__input image-generator__input--output-size"
         />
       </div>

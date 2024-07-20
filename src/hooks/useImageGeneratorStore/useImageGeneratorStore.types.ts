@@ -5,3 +5,8 @@ export interface ImageGeneratorState {
   ratioWidth: number;
   ratioHeight: number;
 }
+
+export interface MaxCanvasArea {
+  width: number;
+  height: number;
+}

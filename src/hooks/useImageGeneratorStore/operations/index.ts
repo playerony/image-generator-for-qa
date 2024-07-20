@@ -1,1 +1,2 @@
-export * from './calculateStateFromMaxArea/calculateStateFromMaxArea.function';
+export * from './updateFormState/updateFormState.function';
+export * from './roundNumberDecimalPlaces/roundNumberDecimalPlaces.function';
