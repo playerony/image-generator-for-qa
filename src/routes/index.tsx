@@ -2,7 +2,6 @@ import { component$, $ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
 import { useImageGeneratorStore } from "~/hooks";
-import { generateImageBlob } from "~/operations";
 
 const Home = component$(() => {
   const {
@@ -13,17 +12,37 @@ const Home = component$(() => {
   } = useImageGeneratorStore();
 
   const handleGenerate = $(async () => {
-    const blob = await generateImageBlob({
+    const worker = new Worker(new URL("../workers/generateImageBlob.worker.js", import.meta.url), { type: "module" });
+
+    worker.onmessage = (event) => {
+      if (!event.data?.success) {
+        console.error("Error generating image:", event.data?.error);
+        return;
+      }
+
+      const url = URL.createObjectURL(event.data.blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "image.png";
+      link.click();
+    }
+
+    worker.postMessage({
       width: formState.width,
       height: formState.height,
     });
 
-    const url = URL.createObjectURL(blob);
-    console.log(url);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "image.png";
-    link.click();
+    // const blob = await generateImageBlob({
+    //   width: formState.width,
+    //   height: formState.height,
+    // });
+
+    // const url = URL.createObjectURL(blob);
+    // console.log(url);
+    // const link = document.createElement("a");
+    // link.href = url;
+    // link.download = "image.png";
+    // link.click();
   });
 
   return (

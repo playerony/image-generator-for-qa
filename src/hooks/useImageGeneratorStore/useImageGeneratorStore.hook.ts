@@ -4,12 +4,12 @@ import { updateFormState, roundNumberDecimalPlaces, rescaleValuesForNewOutputSiz
 
 import type { ImageGeneratorState, MaxCanvasArea } from '~/interfaces';
 
-const MAX_RATIO_VALUE = 50;
+// const MAX_RATIO_VALUE = 50;
 const SMALLEST_CANVAS_SIZE = 4096;
 
 export const useImageGeneratorStore = () => {
   const maxCanvasArea = useStore<MaxCanvasArea>({ width: SMALLEST_CANVAS_SIZE, height: SMALLEST_CANVAS_SIZE });
-  const formState = useStore<ImageGeneratorState>(rescaleValuesForNewOutputSize({ currentRatioWidth: 16,  currentRatioHeight: 9, maxCanvasArea, newOutputSizeInMegabytes: 15 }));
+  const formState = useStore<ImageGeneratorState>(rescaleValuesForNewOutputSize({ currentRatioWidth: 16,  currentRatioHeight: 9, maxCanvasArea, newOutputSizeInMegabytes: 100 }));
 
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(async () => {

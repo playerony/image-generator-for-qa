@@ -1,7 +1,5 @@
 import { PNG } from 'pngjs/browser';
 
-import type { Input } from './generateImageBlob.types'
-
 const SINGLE_CHUNK_SIZE = 256;
 
 const CHUNK_COLORS = new Array(SINGLE_CHUNK_SIZE * SINGLE_CHUNK_SIZE).fill(0).map(() => ({
@@ -11,10 +9,10 @@ const CHUNK_COLORS = new Array(SINGLE_CHUNK_SIZE * SINGLE_CHUNK_SIZE).fill(0).ma
   a: Math.floor(Math.random() * 256),
 }));
 
-const roundNumberToEven = (num: number): number => Math.ceil(num / 2) * 2;
-const getAmountOfChunks = (num: number): number => Math.ceil(num / 32);
+const roundNumberToEven = (num) => Math.ceil(num / 2) * 2;
+const getAmountOfChunks = (num) => Math.ceil(num / SINGLE_CHUNK_SIZE);
 
-export const generateImageBlob = ({ height, width }: Input): Promise<Blob> => {
+const generateImageBlob = ({ height, width }) => {
   return new Promise((resolve, reject) => {
     const parsedWidth = roundNumberToEven(width);
     const parsedHeight = roundNumberToEven(height);
@@ -26,7 +24,6 @@ export const generateImageBlob = ({ height, width }: Input): Promise<Blob> => {
     const singleChunkHeight = Math.ceil(parsedHeight / rowChunkAmount);
 
     const png = new PNG({ width: parsedWidth, height: parsedHeight });
-
     for (let i = 0; i < singleChunkWidth * singleChunkHeight; i++) {
       for (let j = 0; j < columnChunkAmount; j++) {
         const x = j * singleChunkWidth + (i % singleChunkWidth);
@@ -36,17 +33,17 @@ export const generateImageBlob = ({ height, width }: Input): Promise<Blob> => {
           const index = (x + y * parsedWidth) * 4;
           const { r, g, b, a } = CHUNK_COLORS[i % CHUNK_COLORS.length];
 
-          png.data[index] = r
-          png.data[index + 1] = g
-          png.data[index + 2] = b
-          png.data[index + 3] = a
+          png.data[index] = r;
+          png.data[index + 1] = g;
+          png.data[index + 2] = b;
+          png.data[index + 3] = a;
         }
       }
     }
 
-    const chunks: Buffer[] = [];
+    const chunks = [];
     const stream = png.pack();
-    stream.on('data', (chunk: Buffer) => {
+    stream.on('data', (chunk) => {
       chunks.push(chunk);
     });
     stream.on('end', () => {
@@ -56,4 +53,13 @@ export const generateImageBlob = ({ height, width }: Input): Promise<Blob> => {
       reject(error);
     });
   });
-}
+};
+
+self.onmessage = async (event) => {
+  try {
+    const blob = await generateImageBlob(event.data);
+    self.postMessage({ success: true, blob });
+  } catch (error) {
+    self.postMessage({ success: false, error });
+  }
+};
