@@ -1,7 +1,8 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, $ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
 import { useImageGeneratorStore } from "~/hooks";
+import { generateImageBlob } from "~/operations";
 
 const Home = component$(() => {
   const {
@@ -10,6 +11,20 @@ const Home = component$(() => {
     onHeightChange,
     onOutputSizeChange,
   } = useImageGeneratorStore();
+
+  const handleGenerate = $(async () => {
+    const blob = await generateImageBlob({
+      width: formState.width,
+      height: formState.height,
+    });
+
+    const url = URL.createObjectURL(blob);
+    console.log(url);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "image.png";
+    link.click();
+  });
 
   return (
     <div class="image-generator">
@@ -87,7 +102,7 @@ const Home = component$(() => {
           class="image-generator__input image-generator__input--output-size"
         />
       </div>
-      <button class="image-generator__generate-button">Generate</button>
+      <button class="image-generator__generate-button" onClick$={handleGenerate}>Generate</button>
     </div>
   );
 });
