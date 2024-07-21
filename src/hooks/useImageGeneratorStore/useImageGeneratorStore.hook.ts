@@ -1,72 +1,61 @@
 import { $, useStore, useVisibleTask$ } from "@builder.io/qwik";
-import { updateFormState, roundNumberDecimalPlaces } from './operations';
 
-import type { ImageGeneratorState, MaxCanvasArea } from './useImageGeneratorStore.types';
+import { updateFormState, roundNumberDecimalPlaces, rescaleValuesForNewOutputSize } from '~/operations';
 
-// const MAX_RATIO_VALUE = 50;
-const DETAULT_OUTPUT_SIZE = 50;
-const DEFAULT_RATIO_WIDTH = 16;
-const DEFAULT_RATIO_HEIGHT = 9;
+import type { ImageGeneratorState, MaxCanvasArea } from '~/interfaces';
+
+const MAX_RATIO_VALUE = 50;
 const SMALLEST_CANVAS_SIZE = 4096;
 
 export const useImageGeneratorStore = () => {
-  const maxCanvasArea = useStore<MaxCanvasArea>({
-    width: SMALLEST_CANVAS_SIZE,
-    height: SMALLEST_CANVAS_SIZE
-  });
-  const formState = useStore<ImageGeneratorState>({
-    width: SMALLEST_CANVAS_SIZE,
-    height: SMALLEST_CANVAS_SIZE,
-    outputSize: DETAULT_OUTPUT_SIZE,
-    ratioWidth: DEFAULT_RATIO_WIDTH,
-    ratioHeight: DEFAULT_RATIO_HEIGHT
-  });
+  const maxCanvasArea = useStore<MaxCanvasArea>({ width: SMALLEST_CANVAS_SIZE, height: SMALLEST_CANVAS_SIZE });
+  const formState = useStore<ImageGeneratorState>(rescaleValuesForNewOutputSize({ currentRatioWidth: 16,  currentRatioHeight: 9, maxCanvasArea, newOutputSizeInMegabytes: 15 }));
 
+  // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(async () => {
     try {
       const maxArea = await window.canvasSize.maxArea({ usePromise: true });
       Object.assign(maxCanvasArea, maxArea);
-      // updateFormState(DEFAULT_RATIO_WIDTH, DEFAULT_RATIO_HEIGHT, DETAULT_OUTPUT_SIZE);
     } catch (error) {
       console.error("Error calculating image dimensions:", error);
-      // updateFormState(DEFAULT_RATIO_WIDTH, DEFAULT_RATIO_HEIGHT, DETAULT_OUTPUT_SIZE);
     }
   });
 
-  // const handleRatioChange = $((event: FocusEvent, ratioType: 'width' | 'height') => {
-  //   if (!(event.target instanceof HTMLInputElement)) return;
+  const handleDimensionsChange = $((event: FocusEvent, dimensionType: 'width' | 'height') => {
+    if (!(event.target instanceof HTMLInputElement)) return;
 
-  //   const inputValue = Number(event.target.value);
-  //   if (isNaN(inputValue) || inputValue < 0 || inputValue > MAX_RATIO_VALUE) {
-  //     event.target.value = String(formState[`ratio${ratioType.charAt(0).toUpperCase() + ratioType.slice(1)}` as keyof ImageGeneratorState]);
-  //     return;
-  //   }
+    const inputValue = Number(event.target.value);
+    if (isNaN(inputValue) || inputValue < 1) {
+      event.target.value = String(formState[dimensionType]);
+      return;
+    }
 
-  //   const roundedValue = roundNumberDecimalPlaces(inputValue);
-  //   updateFormState(
-  //     ratioType === 'width' ? roundedValue : formState.ratioWidth,
-  //     ratioType === 'height' ? roundedValue : formState.ratioHeight
-  //   );
-  // });
+    const roundedValue = roundNumberDecimalPlaces(inputValue);
+    Object.assign(formState, updateFormState({
+      formState,
+      maxCanvasArea,
+      updatedFormState: {
+        width: dimensionType === 'width' ? roundedValue : formState.width,
+        height: dimensionType === 'height' ? roundedValue : formState.height
+      }
+    }));
+  });
 
-  // const onRatioWidthChange = $((event: FocusEvent) => handleRatioChange(event, 'width'));
-  // const onRatioHeightChange = $((event: FocusEvent) => handleRatioChange(event, 'height'));
+  const onWidthChange = $((event: FocusEvent) => handleDimensionsChange(event, 'width'));
+  const onHeightChange = $((event: FocusEvent) => handleDimensionsChange(event, 'height'));
 
   const onOutputSizeChange = $((event: FocusEvent) => {
     if (!(event.target instanceof HTMLInputElement)) return;
 
     const inputValue = Number(event.target.value);
-    if (isNaN(inputValue) || inputValue < 0) {
+    if (isNaN(inputValue) || inputValue <= 0.1) {
       event.target.value = String(formState.outputSize);
       return;
     }
 
     const roundedValue = roundNumberDecimalPlaces(inputValue);
-    Object.assign(
-      formState,
-      updateFormState({ formState, updatedFormState: { outputSize: roundedValue }, maxCanvasArea })
-    );
+    Object.assign(formState, updateFormState({ formState, updatedFormState: { outputSize: roundedValue }, maxCanvasArea }));
   });
 
-  return { formState, onOutputSizeChange };
+  return { formState, onOutputSizeChange, onWidthChange, onHeightChange };
 };

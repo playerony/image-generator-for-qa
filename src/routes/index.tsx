@@ -1,10 +1,15 @@
-import { component$, $ } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
 import { useImageGeneratorStore } from "~/hooks";
 
 const Home = component$(() => {
-  const { formState, onOutputSizeChange } = useImageGeneratorStore();
+  const {
+    formState,
+    onWidthChange,
+    onHeightChange,
+    onOutputSizeChange,
+  } = useImageGeneratorStore();
 
   return (
     <div class="image-generator">
@@ -18,7 +23,7 @@ const Home = component$(() => {
             Ratio Width
           </label>
           <input
-            min={0}
+            min={1}
             max={50}
             step={0.01}
             type="number"
@@ -33,7 +38,7 @@ const Home = component$(() => {
             Ratio Height
           </label>
           <input
-            min={0}
+            min={1}
             max={50}
             step={0.01}
             type="number"
@@ -53,6 +58,7 @@ const Home = component$(() => {
             id="width"
             type="number"
             value={formState.width}
+            onBlur$={onWidthChange}
             class="image-generator__input image-generator__input--width"
           />
         </div>
@@ -64,6 +70,7 @@ const Home = component$(() => {
             id="height"
             type="number"
             value={formState.height}
+            onBlur$={onHeightChange}
             class="image-generator__input image-generator__input--height"
           />
         </div>
