@@ -121,6 +121,19 @@ body {
   margin-top: 2rem;
 }
 
+.image-generator__generate-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.image-generator__loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
 .image-generator__generate-button:hover {
   background-color: #3ab7dc;
   transform: translateY(-2px);

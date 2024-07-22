@@ -1,20 +1,18 @@
-import { component$, $ } from "@builder.io/qwik";
+import { component$, $, useSignal } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
 import { useImageGeneratorStore } from "~/hooks";
 
 const Home = component$(() => {
-  const {
-    formState,
-    onWidthChange,
-    onHeightChange,
-    onOutputSizeChange,
-  } = useImageGeneratorStore();
+  const isGeneratingImage = useSignal(false);
+  const { formState, onWidthChange, onHeightChange, onOutputSizeChange } = useImageGeneratorStore();
 
   const handleGenerate = $(async () => {
+    isGeneratingImage.value = true;
     const worker = new Worker(new URL("../workers/generateImageBlob.worker.js", import.meta.url), { type: "module" });
 
     worker.onmessage = (event) => {
+      isGeneratingImage.value = false;
       if (!event.data?.success) {
         console.error("Error generating image:", event.data?.error);
         return;
@@ -23,7 +21,7 @@ const Home = component$(() => {
       const url = URL.createObjectURL(event.data.blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = "image.png";
+      link.download = `image-${formState.width}x${formState.height}-${formState.outputSize}mb-${Date.now()}.png`;
       link.click();
     }
 
@@ -31,18 +29,6 @@ const Home = component$(() => {
       width: formState.width,
       height: formState.height,
     });
-
-    // const blob = await generateImageBlob({
-    //   width: formState.width,
-    //   height: formState.height,
-    // });
-
-    // const url = URL.createObjectURL(blob);
-    // console.log(url);
-    // const link = document.createElement("a");
-    // link.href = url;
-    // link.download = "image.png";
-    // link.click();
   });
 
   return (
@@ -64,6 +50,7 @@ const Home = component$(() => {
             id="ratio-width"
             value={formState.ratioWidth}
             // onBlur$={onRatioWidthChange}
+            disabled={isGeneratingImage.value}
             class="image-generator__input image-generator__input--ratio-width"
           />
         </div>
@@ -79,6 +66,7 @@ const Home = component$(() => {
             id="ratio-height"
             // onBlur$={onRatioHeightChange}
             value={formState.ratioHeight}
+            disabled={isGeneratingImage.value}
             class="image-generator__input image-generator__input--ratio-height"
           />
         </div>
@@ -93,6 +81,7 @@ const Home = component$(() => {
             type="number"
             value={formState.width}
             onBlur$={onWidthChange}
+            disabled={isGeneratingImage.value}
             class="image-generator__input image-generator__input--width"
           />
         </div>
@@ -105,6 +94,7 @@ const Home = component$(() => {
             type="number"
             value={formState.height}
             onBlur$={onHeightChange}
+            disabled={isGeneratingImage.value}
             class="image-generator__input image-generator__input--height"
           />
         </div>
@@ -118,10 +108,18 @@ const Home = component$(() => {
           id="output-size"
           value={formState.outputSize}
           onBlur$={onOutputSizeChange}
+          disabled={isGeneratingImage.value}
           class="image-generator__input image-generator__input--output-size"
         />
       </div>
-      <button class="image-generator__generate-button" onClick$={handleGenerate}>Generate</button>
+      <button
+        onClick$={handleGenerate}
+        disabled={isGeneratingImage.value}
+        class="image-generator__generate-button"
+      >
+        Generate
+      </button>
+      {isGeneratingImage.value ? <div class="image-generator__loading">Generating...</div> : null}
     </div>
   );
 });
