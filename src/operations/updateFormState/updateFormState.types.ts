@@ -1,7 +1,4 @@
-import type {
-  ImageGeneratorState,
-  MaxCanvasArea,
-} from "../../useImageGeneratorStore.types";
+import type { ImageGeneratorState, MaxCanvasArea } from "~/interfaces";
 
 export interface UpdateFormStateParams {
   maxCanvasArea: MaxCanvasArea;
