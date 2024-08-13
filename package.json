@@ -32,6 +32,7 @@
   "devDependencies": {
     "@builder.io/qwik": "^1.7.1",
     "@builder.io/qwik-city": "^1.7.1",
+    "@builder.io/qwik-worker": "^0.0.1",
     "@types/canvas-size": "^1.2.2",
     "@types/eslint": "^8.56.10",
     "@types/node": "^20.12.7",
@@ -51,6 +52,9 @@
     "vite": "^5.2.10",
     "vite-tsconfig-paths": "^4.2.1",
     "vitest": "^2.0.3"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
   },
   "dependencies": {
     "pngjs": "^7.0.0"

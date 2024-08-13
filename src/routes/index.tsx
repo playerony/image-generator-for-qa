@@ -1,6 +1,8 @@
 import { component$, $, useSignal } from "@builder.io/qwik";
+import { worker$ } from '@builder.io/qwik-worker';
 import type { DocumentHead } from "@builder.io/qwik-city";
 
+import { generateImageBlob } from '~/operations';
 import { useSuperDuperStateManager } from "~/hooks";
 
 const Home = component$(() => {
@@ -14,31 +16,23 @@ const Home = component$(() => {
     onRatioWidthChange,
   } = useSuperDuperStateManager();
 
+  const generateImageBlobWorker = worker$(generateImageBlob)
+
   const handleGenerate = $(async () => {
-    isGeneratingImage.value = true;
-    const worker = new Worker(
-      new URL("../workers/generateImageBlob.worker.js", import.meta.url),
-      { type: "module" },
-    );
+    try {
+      isGeneratingImage.value = true;
+      const blob = await generateImageBlobWorker(formState.height, formState.width);
 
-    worker.onmessage = (event) => {
-      isGeneratingImage.value = false;
-      if (!event.data?.success) {
-        console.error("Error generating image:", event.data?.error);
-        return;
-      }
-
-      const url = URL.createObjectURL(event.data.blob);
+      const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
       link.download = `${formState.width}x${formState.height}-${formState.outputSize}mb-${Date.now()}.png`;
       link.click();
-    };
-
-    worker.postMessage({
-      width: formState.width,
-      height: formState.height,
-    });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      isGeneratingImage.value = false;
+    }
   });
 
   return (

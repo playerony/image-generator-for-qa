@@ -11,10 +11,10 @@ const CHUNK_COLORS = new Array(SINGLE_CHUNK_SIZE * SINGLE_CHUNK_SIZE)
     a: Math.floor(Math.random() * 256),
   }));
 
-const roundNumberToEven = (num) => Math.ceil(num / 2) * 2;
-const getAmountOfChunks = (num) => Math.ceil(num / SINGLE_CHUNK_SIZE);
+const roundNumberToEven = (num: number) => Math.ceil(num / 2) * 2;
+const getAmountOfChunks = (num: number) => Math.ceil(num / SINGLE_CHUNK_SIZE);
 
-const generateImageBlob = ({ height, width }) => {
+export const generateImageBlob = (height: number, width: number): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     const parsedWidth = roundNumberToEven(width);
     const parsedHeight = roundNumberToEven(height);
@@ -43,7 +43,7 @@ const generateImageBlob = ({ height, width }) => {
       }
     }
 
-    const chunks = [];
+    const chunks: BlobPart[] = [];
     const stream = png.pack();
     stream.on("data", (chunk) => {
       chunks.push(chunk);
@@ -57,11 +57,3 @@ const generateImageBlob = ({ height, width }) => {
   });
 };
 
-self.onmessage = async (event) => {
-  try {
-    const blob = await generateImageBlob(event.data);
-    self.postMessage({ success: true, blob });
-  } catch (error) {
-    self.postMessage({ success: false, error });
-  }
-};
