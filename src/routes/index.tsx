@@ -1,8 +1,8 @@
 import { component$, $, useSignal } from "@builder.io/qwik";
-import { worker$ } from '@builder.io/qwik-worker';
+import { worker$ } from "@builder.io/qwik-worker";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
-import { generateImageBlob } from '~/operations';
+import { generateImageBlob } from "~/operations";
 import { useSuperDuperStateManager } from "~/hooks";
 
 const Home = component$(() => {
@@ -16,12 +16,15 @@ const Home = component$(() => {
     onRatioWidthChange,
   } = useSuperDuperStateManager();
 
-  const generateImageBlobWorker = worker$(generateImageBlob)
+  const generateImageBlobWorker = worker$(generateImageBlob);
 
   const handleGenerate = $(async () => {
     try {
       isGeneratingImage.value = true;
-      const blob = await generateImageBlobWorker(formState.height, formState.width);
+      const blob = await generateImageBlobWorker(
+        formState.height,
+        formState.width,
+      );
 
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");

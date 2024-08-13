@@ -14,7 +14,10 @@ const CHUNK_COLORS = new Array(SINGLE_CHUNK_SIZE * SINGLE_CHUNK_SIZE)
 const roundNumberToEven = (num: number) => Math.ceil(num / 2) * 2;
 const getAmountOfChunks = (num: number) => Math.ceil(num / SINGLE_CHUNK_SIZE);
 
-export const generateImageBlob = (height: number, width: number): Promise<Blob> => {
+export const generateImageBlob = (
+  height: number,
+  width: number,
+): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     const parsedWidth = roundNumberToEven(width);
     const parsedHeight = roundNumberToEven(height);
@@ -56,4 +59,3 @@ export const generateImageBlob = (height: number, width: number): Promise<Blob> 
     });
   });
 };
-

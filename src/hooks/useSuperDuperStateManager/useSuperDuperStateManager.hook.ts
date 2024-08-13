@@ -1,4 +1,4 @@
-import { $, useStore, useVisibleTask$ } from "@builder.io/qwik";
+import { $, useStore } from "@builder.io/qwik";
 
 import {
   updateFormState,
@@ -8,32 +8,20 @@ import {
 
 import type { ImageGeneratorState, MaxCanvasArea } from "~/interfaces";
 
-// const MAX_RATIO_VALUE = 50;
-const SMALLEST_CANVAS_SIZE = 4096;
+const MAX_CANVAS_AREA: MaxCanvasArea = {
+  width: 4096 * 5,
+  height: 4096 * 5,
+};
 
 export const useSuperDuperStateManager = () => {
-  const maxCanvasArea = useStore<MaxCanvasArea>({
-    width: SMALLEST_CANVAS_SIZE,
-    height: SMALLEST_CANVAS_SIZE,
-  });
   const formState = useStore<ImageGeneratorState>(
     rescaleValuesForNewOutputSize({
       currentRatioWidth: 16,
       currentRatioHeight: 9,
-      maxCanvasArea,
-      newOutputSizeInMegabytes: 100,
+      maxCanvasArea: MAX_CANVAS_AREA,
+      newOutputSizeInMegabytes: 10000,
     }),
   );
-
-  // eslint-disable-next-line qwik/no-use-visible-task
-  useVisibleTask$(async () => {
-    try {
-      const maxArea = await window.canvasSize.maxArea({ usePromise: true });
-      Object.assign(maxCanvasArea, maxArea);
-    } catch (error) {
-      console.error("Error calculating image dimensions:", error);
-    }
-  });
 
   const handleDimensionsChange = $(
     (event: FocusEvent, dimensionType: "width" | "height") => {
@@ -50,7 +38,7 @@ export const useSuperDuperStateManager = () => {
         formState,
         updateFormState({
           formState,
-          maxCanvasArea,
+          maxCanvasArea: MAX_CANVAS_AREA,
           updatedFormState: {
             width: dimensionType === "width" ? roundedValue : formState.width,
             height:
@@ -83,7 +71,7 @@ export const useSuperDuperStateManager = () => {
       updateFormState({
         formState,
         updatedFormState: { outputSize: roundedValue },
-        maxCanvasArea,
+        maxCanvasArea: MAX_CANVAS_AREA,
       }),
     );
   });
@@ -103,7 +91,7 @@ export const useSuperDuperStateManager = () => {
         formState,
         updateFormState({
           formState,
-          maxCanvasArea,
+          maxCanvasArea: MAX_CANVAS_AREA,
           updatedFormState: {
             ratioWidth:
               dimensionType === "width" ? roundedValue : formState.ratioWidth,
