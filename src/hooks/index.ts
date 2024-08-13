@@ -1,1 +1,1 @@
-export * from './useImageGeneratorStore/useImageGeneratorStore.hook';
+export * from "./useSuperDuperStateManager/useSuperDuperStateManager.hook";

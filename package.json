@@ -25,7 +25,8 @@
     "preview": "qwik build preview && vite preview --open",
     "start": "vite --open --mode ssr",
     "qwik": "qwik",
-    "test": "vitest"
+    "test": "vitest",
+    "test.coverage": "vitest --coverage"
   },
   "devDependencies": {
     "@builder.io/qwik": "^1.7.1",
@@ -36,6 +37,7 @@
     "@types/pngjs": "^6.0.5",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
+    "@vitest/coverage-v8": "^2.0.5",
     "canvas-size": "^2.0.0",
     "clsx": "^2.1.1",
     "eslint": "^8.57.0",

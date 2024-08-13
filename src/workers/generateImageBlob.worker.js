@@ -1,13 +1,15 @@
-import { PNG } from 'pngjs/browser';
+import { PNG } from "pngjs/browser";
 
 const SINGLE_CHUNK_SIZE = 256;
 
-const CHUNK_COLORS = new Array(SINGLE_CHUNK_SIZE * SINGLE_CHUNK_SIZE).fill(0).map(() => ({
-  r: Math.floor(Math.random() * 256),
-  g: Math.floor(Math.random() * 256),
-  b: Math.floor(Math.random() * 256),
-  a: Math.floor(Math.random() * 256),
-}));
+const CHUNK_COLORS = new Array(SINGLE_CHUNK_SIZE * SINGLE_CHUNK_SIZE)
+  .fill(0)
+  .map(() => ({
+    r: Math.floor(Math.random() * 256),
+    g: Math.floor(Math.random() * 256),
+    b: Math.floor(Math.random() * 256),
+    a: Math.floor(Math.random() * 256),
+  }));
 
 const roundNumberToEven = (num) => Math.ceil(num / 2) * 2;
 const getAmountOfChunks = (num) => Math.ceil(num / SINGLE_CHUNK_SIZE);
@@ -43,13 +45,13 @@ const generateImageBlob = ({ height, width }) => {
 
     const chunks = [];
     const stream = png.pack();
-    stream.on('data', (chunk) => {
+    stream.on("data", (chunk) => {
       chunks.push(chunk);
     });
-    stream.on('end', () => {
-      resolve(new Blob(chunks, { type: 'image/png' }));
+    stream.on("end", () => {
+      resolve(new Blob(chunks, { type: "image/png" }));
     });
-    stream.on('error', (error) => {
+    stream.on("error", (error) => {
       reject(error);
     });
   });

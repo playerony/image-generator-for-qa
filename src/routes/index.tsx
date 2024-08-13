@@ -1,15 +1,25 @@
 import { component$, $, useSignal } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
-import { useImageGeneratorStore } from "~/hooks";
+import { useSuperDuperStateManager } from "~/hooks";
 
 const Home = component$(() => {
   const isGeneratingImage = useSignal(false);
-  const { formState, onWidthChange, onHeightChange, onOutputSizeChange } = useImageGeneratorStore();
+  const {
+    formState,
+    onWidthChange,
+    onHeightChange,
+    onOutputSizeChange,
+    onRatioHeightChange,
+    onRatioWidthChange,
+  } = useSuperDuperStateManager();
 
   const handleGenerate = $(async () => {
     isGeneratingImage.value = true;
-    const worker = new Worker(new URL("../workers/generateImageBlob.worker.js", import.meta.url), { type: "module" });
+    const worker = new Worker(
+      new URL("../workers/generateImageBlob.worker.js", import.meta.url),
+      { type: "module" },
+    );
 
     worker.onmessage = (event) => {
       isGeneratingImage.value = false;
@@ -21,9 +31,9 @@ const Home = component$(() => {
       const url = URL.createObjectURL(event.data.blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `image-${formState.width}x${formState.height}-${formState.outputSize}mb-${Date.now()}.png`;
+      link.download = `${formState.width}x${formState.height}-${formState.outputSize}mb-${Date.now()}.png`;
       link.click();
-    }
+    };
 
     worker.postMessage({
       width: formState.width,
@@ -49,7 +59,7 @@ const Home = component$(() => {
             type="number"
             id="ratio-width"
             value={formState.ratioWidth}
-            // onBlur$={onRatioWidthChange}
+            onBlur$={onRatioWidthChange}
             disabled={isGeneratingImage.value}
             class="image-generator__input image-generator__input--ratio-width"
           />
@@ -64,7 +74,7 @@ const Home = component$(() => {
             step={0.01}
             type="number"
             id="ratio-height"
-            // onBlur$={onRatioHeightChange}
+            onBlur$={onRatioHeightChange}
             value={formState.ratioHeight}
             disabled={isGeneratingImage.value}
             class="image-generator__input image-generator__input--ratio-height"
@@ -119,7 +129,9 @@ const Home = component$(() => {
       >
         Generate
       </button>
-      {isGeneratingImage.value ? <div class="image-generator__loading">Generating...</div> : null}
+      {isGeneratingImage.value ? (
+        <div class="image-generator__loading">Generating...</div>
+      ) : null}
     </div>
   );
 });

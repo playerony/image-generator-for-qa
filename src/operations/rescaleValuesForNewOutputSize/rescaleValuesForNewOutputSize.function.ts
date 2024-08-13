@@ -1,19 +1,22 @@
-import { roundNumberDecimalPlaces } from '../roundNumberDecimalPlaces/roundNumberDecimalPlaces.function';
-import { calculateAspectRatioScalar } from '../calculateAspectRatioScalar/calculateAspectRatioScalar.function'
-import { calculatePixelsFromMegabytes } from '../calculatePixelsFromMegabytes/calculatePixelsFromMegabytes.function'
-import { calculateMegabytesFromPixels } from '../calculateMegabytesFromPixels/calculateMegabytesFromPixels.function'
+import { roundNumberDecimalPlaces } from "../roundNumberDecimalPlaces/roundNumberDecimalPlaces.function";
+import { calculateAspectRatioScalar } from "../calculateAspectRatioScalar/calculateAspectRatioScalar.function";
+import { calculatePixelsFromMegabytes } from "../calculatePixelsFromMegabytes/calculatePixelsFromMegabytes.function";
+import { calculateMegabytesFromPixels } from "../calculateMegabytesFromPixels/calculateMegabytesFromPixels.function";
 
-import type { ImageGeneratorState } from '~/interfaces';
-import type { Input } from './rescaleValuesForNewOutputSize.types';
+import type { ImageGeneratorState } from "~/interfaces";
+import type { RescaleValuesForNewOutputSizeParams } from "./rescaleValuesForNewOutputSize.types";
 
 export const rescaleValuesForNewOutputSize = ({
   maxCanvasArea,
   currentRatioWidth,
   currentRatioHeight,
-  newOutputSizeInMegabytes
-}: Input): ImageGeneratorState => {
+  newOutputSizeInMegabytes,
+}: RescaleValuesForNewOutputSizeParams): ImageGeneratorState => {
   const targetPixels = calculatePixelsFromMegabytes(newOutputSizeInMegabytes);
-  const aspectRatioScalar = calculateAspectRatioScalar(currentRatioWidth, currentRatioHeight);
+  const aspectRatioScalar = calculateAspectRatioScalar(
+    currentRatioWidth,
+    currentRatioHeight,
+  );
 
   let newWidthOutput = Math.sqrt(targetPixels * aspectRatioScalar);
   let newHeightOutput = newWidthOutput / aspectRatioScalar;
