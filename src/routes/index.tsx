@@ -134,12 +134,17 @@ const Home = component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to Qwik",
+  title: "Image Generator",
   meta: [
     {
       name: "description",
-      content: "Qwik site description",
+      content: "Generate images with custom dimensions and output size.",
     },
+    {
+      name: "keywords",
+      content: "image, generator",
+    },
+
   ],
 };
 

@@ -19,7 +19,7 @@ export const useSuperDuperStateManager = () => {
       currentRatioWidth: 16,
       currentRatioHeight: 9,
       maxCanvasArea: MAX_CANVAS_AREA,
-      newOutputSizeInMegabytes: 10000,
+      newOutputSizeInMegabytes: 10,
     }),
   );
 
