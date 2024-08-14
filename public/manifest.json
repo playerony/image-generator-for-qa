@@ -1,9 +1,27 @@
 {
-  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-  "name": "qwik-project-name",
-  "short_name": "Welcome to Qwik",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#fff",
-  "description": "A Qwik project app."
+  "theme_color":"#90c2e7",
+  "background_color":"#0d1317",
+  "icons":[
+    {
+      "purpose":"maskable",
+      "sizes":"512x512",
+      "src":"icon512_maskable.png",
+      "type":"image/png"
+    },
+    {
+      "purpose":"any",
+      "sizes":"512x512",
+      "src":"icon512_rounded.png",
+      "type":"image/png"
+    }
+  ],
+  "orientation":"portrait",
+  "display":"standalone",
+  "dir":"auto",
+  "lang":"en-US",
+  "name":"Image Generator",
+  "short_name":"Image Generator",
+  "scope":"/",
+  "start_url":"/",
+  "description":"UI to generate images at any size and dimensions in order to tests FE and BE limitations"
 }
