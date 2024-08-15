@@ -125,10 +125,8 @@ const Home = component$(() => {
         class="image-generator__generate-button"
       >
         Generate
+        {isGeneratingImage.value ? <div class="image-generator__spinner" /> : null}
       </button>
-      {isGeneratingImage.value ? (
-        <div class="image-generator__loading">Generating...</div>
-      ) : null}
     </div>
   );
 });

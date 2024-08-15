@@ -28,9 +28,10 @@ body {
 .image-generator {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 2rem;
-  width: 400px;
+  border-radius: 8px;
+  padding: 1rem;
+  padding-top: 0.3rem;
+  width: 300px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   border: 2px solid rgba(255, 255, 255, 0.1);
   transform: translateY(20px);
@@ -41,8 +42,8 @@ body {
   user-select: none;
   color: var(--secondary-color);
   text-align: center;
-  margin-bottom: 2rem;
-  font-size: 5.5rem;
+  margin-bottom: 1rem;
+  font-size: 5.7rem;
   text-shadow: 2px 2px 4px var(--shadow-color);
 }
 
@@ -50,8 +51,8 @@ body {
   color: var(--primary-color);
   display: block;
   font-size: 1.2rem;
-  font-size: 3rem;
-  margin-top: -1.5rem;
+  font-size: 2.9rem;
+  margin-top: -1.2rem;
 }
 
 .image-generator__ratio-inputs,
@@ -60,14 +61,13 @@ body {
   display: flex;
   gap: 1rem;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .image-generator__input-group {
-  gap: 0.4rem;
+  gap: 0.2rem;
   display: flex;
   flex-grow: 1;
-  text-transform: uppercase;
   flex-direction: column;
 }
 
@@ -75,6 +75,7 @@ body {
   display: block;
   color: var(--secondary-color);
   font-size: 0.8rem;
+  letter-spacing: 0.5px;
 }
 
 .image-generator__input {
@@ -82,10 +83,10 @@ body {
   padding: 0.5rem;
   border: none;
   box-sizing: border-box;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.1);
   color: var(--secondary-color);
-  transition: all 0.3s ease;
+  transition: all 250ms ease;
 }
 
 .image-generator__input:focus {
@@ -96,18 +97,21 @@ body {
 .image-generator__generate-button {
   display: block;
   width: 100%;
-  padding: 1rem;
+  padding: 0.7rem;
   background-color: var(--primary-color);
   color: var(--background-color);
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 2rem;
+  transition: all 250ms ease;
+  margin-top: 1.5rem;
+  user-select: none;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .image-generator__generate-button:disabled {
@@ -125,11 +129,24 @@ body {
 
 .image-generator__generate-button:hover {
   background-color: #3ab7dc;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .image-generator__generate-button:active {
-  transform: translateY(0);
   box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.image-generator__spinner {
+  width: 1rem;
+  height: 1rem;
+  background-color: transparent;
+  border: 2px solid currentColor;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: spin 500ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
