@@ -76,46 +76,28 @@ export const useSuperDuperStateManager = () => {
     );
   });
 
-  const handleRatioChange = $(
-    (event: FocusEvent, dimensionType: "width" | "height") => {
-      if (!(event.target instanceof HTMLInputElement)) return;
+  const onRatioChange = $((event: Event) => {
+    if (!(event.target instanceof HTMLSelectElement)) return;
+    const { width, height } = JSON.parse(event.target.value);
 
-      const inputValue = Number(event.target.value);
-      if (isNaN(inputValue) || inputValue < 1) {
-        event.target.value = String(formState[dimensionType]);
-        return;
-      }
-
-      const roundedValue = roundNumberDecimalPlaces(inputValue);
-      Object.assign(
+    Object.assign(
+      formState,
+      updateFormState({
         formState,
-        updateFormState({
-          formState,
-          maxCanvasArea: MAX_CANVAS_AREA,
-          updatedFormState: {
-            ratioWidth:
-              dimensionType === "width" ? roundedValue : formState.ratioWidth,
-            ratioHeight:
-              dimensionType === "height" ? roundedValue : formState.ratioHeight,
-          },
-        }),
-      );
-    },
-  );
-
-  const onRatioWidthChange = $((event: FocusEvent) =>
-    handleRatioChange(event, "width"),
-  );
-  const onRatioHeightChange = $((event: FocusEvent) =>
-    handleRatioChange(event, "height"),
-  );
+        maxCanvasArea: MAX_CANVAS_AREA,
+        updatedFormState: {
+          ratioWidth: width,
+          ratioHeight: height,
+        },
+      }),
+    );
+  });
 
   return {
     formState,
     onOutputSizeChange,
     onWidthChange,
     onHeightChange,
-    onRatioWidthChange,
-    onRatioHeightChange,
+    onRatioChange,
   };
 };
