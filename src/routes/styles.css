@@ -39,10 +39,13 @@ body {
 
 .image-generator__title {
   margin: 0;
+  height: 55px;
   user-select: none;
   color: var(--primary-color);
-  padding: 1rem 2rem;
+  padding: 0 2rem;
   border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
 }
 
 .image-generator__ratio-inputs,
@@ -128,6 +131,8 @@ body {
   display: flex;
   align-items: center;
   height: 55px;
+  font-size: 1rem;
+  font-family: var(--font-family);
 }
 
 .image-generator__generate-button:disabled {
