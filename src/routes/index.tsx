@@ -127,15 +127,11 @@ const Home = component$(() => {
 
   return (
     <div class="image-generator">
-      <h2 class="image-generator__title">
-        IMAGE
-        <span class="image-generator__title-span">GENERATOR</span>
-      </h2>
+      <p class="image-generator__title">
+        IMAGE GENERATOR #1
+      </p>
       <div class="image-generator__ratio-inputs">
         <div class="image-generator__input-group">
-          <label for="ratio" class="image-generator__label">
-            Aspect Ratio
-          </label>
           <select
             id="ratio"
             onChange$={onRatioChange}
@@ -147,13 +143,13 @@ const Home = component$(() => {
               <option key={value} value={value}>{label}</option>
             ))}
           </select>
+          <label for="ratio" class="image-generator__label">
+            Aspect Ratio
+          </label>
         </div>
       </div>
       <div class="image-generator__dimension-inputs">
         <div class="image-generator__input-group">
-          <label for="width" class="image-generator__label">
-            Width
-          </label>
           <input
             id="width"
             type="number"
@@ -162,11 +158,11 @@ const Home = component$(() => {
             disabled={isGeneratingImage.value}
             class="image-generator__input image-generator__input--width"
           />
+          <label for="width" class="image-generator__label">
+            Width
+          </label>
         </div>
         <div class="image-generator__input-group">
-          <label for="height" class="image-generator__label">
-            Height
-          </label>
           <input
             id="height"
             type="number"
@@ -175,12 +171,12 @@ const Home = component$(() => {
             disabled={isGeneratingImage.value}
             class="image-generator__input image-generator__input--height"
           />
+          <label for="height" class="image-generator__label">
+            Height
+          </label>
         </div>
       </div>
       <div class="image-generator__input-group">
-        <label for="output-size" class="image-generator__label">
-          Estimated output size in megabytes
-        </label>
         <input
           type="number"
           id="output-size"
@@ -189,13 +185,16 @@ const Home = component$(() => {
           disabled={isGeneratingImage.value}
           class="image-generator__input image-generator__input--output-size"
         />
+        <label for="output-size" class="image-generator__label">
+          Estimated output size in megabytes
+        </label>
       </div>
       <button
         onClick$={handleGenerate}
         disabled={isGeneratingImage.value}
         class="image-generator__generate-button"
       >
-        Generate
+        GENERATE
         {isGeneratingImage.value ? <div class="image-generator__spinner" /> : null}
       </button>
     </div>
