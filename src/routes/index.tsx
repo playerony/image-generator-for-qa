@@ -2,7 +2,7 @@ import { component$, $, useSignal } from "@builder.io/qwik";
 import { worker$ } from "@builder.io/qwik-worker";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
-import { generateImageBlob } from "~/operations";
+import { generateImageBlob } from "~/functions";
 import { useSuperDuperStateManager } from "~/hooks";
 
 const ASPECT_RATIOS = [
@@ -144,7 +144,7 @@ const Home = component$(() => {
             ))}
           </select>
           <label for="ratio" class="image-generator__label">
-            aspect Ratio
+            aspect ratio
           </label>
         </div>
       </div>

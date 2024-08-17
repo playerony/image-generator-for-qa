@@ -4,7 +4,7 @@ import {
   updateFormState,
   roundNumberDecimalPlaces,
   rescaleValuesForNewOutputSize,
-} from "~/operations";
+} from "~/functions";
 
 import type { ImageGeneratorState, MaxCanvasArea } from "~/interfaces";
 
