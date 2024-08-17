@@ -144,7 +144,7 @@ const Home = component$(() => {
             ))}
           </select>
           <label for="ratio" class="image-generator__label">
-            Aspect Ratio
+            aspect Ratio
           </label>
         </div>
       </div>
@@ -159,7 +159,7 @@ const Home = component$(() => {
             class="image-generator__input image-generator__input--width"
           />
           <label for="width" class="image-generator__label">
-            Width
+            width
           </label>
         </div>
         <div class="image-generator__input-group">
@@ -172,7 +172,7 @@ const Home = component$(() => {
             class="image-generator__input image-generator__input--height"
           />
           <label for="height" class="image-generator__label">
-            Height
+            height
           </label>
         </div>
       </div>
@@ -186,7 +186,7 @@ const Home = component$(() => {
           class="image-generator__input image-generator__input--output-size"
         />
         <label for="output-size" class="image-generator__label">
-          Estimated output size in megabytes
+          output size in megabytes
         </label>
       </div>
       <button

@@ -4,6 +4,8 @@
   --border-color: #ECECEC;
   --text-color: #BCBCBC;
   --shadow-color: rgba(0, 0, 0, 0.2);
+
+  --font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
 }
 
 .root {
@@ -15,7 +17,6 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +24,7 @@ body {
   padding: 0;
   font-size: 1rem;
   background-color: var(--secondary-color);
+  font-family: var(--font-family);
 }
 
 .image-generator {
@@ -36,10 +38,9 @@ body {
 }
 
 .image-generator__title {
-  margin-top: 0;
+  margin: 0;
   user-select: none;
   color: var(--primary-color);
-  margin-bottom: 1rem;
   padding: 1rem 2rem;
   border-bottom: 1px solid var(--border-color);
 }
@@ -50,7 +51,7 @@ body {
   display: flex;
   gap: 1rem;
   justify-content: space-between;
-  padding: 1rem 0;
+  padding: 0;
 }
 
 .image-generator__input-group {
@@ -59,6 +60,7 @@ body {
   flex-grow: 1;
   flex-direction: column;
   padding: 0 2rem;
+  padding-top: 1rem;
 }
 
 .image-generator__label {
@@ -72,11 +74,12 @@ body {
   padding: 0;
   border: none;
   box-sizing: border-box;
-  border-radius: 8px;
+  border-radius: 0;
   font-size: 1rem;
   background-color: rgba(255, 255, 255, 0.1);
   color: var(--primary-color);
   transition: all 250ms ease;
+  font-family: var(--font-family);
 }
 
 .image-generator__input:focus {
@@ -92,7 +95,7 @@ body {
   border: none;
   cursor: pointer;
   transition: all 250ms ease;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   user-select: none;
   text-align: left;
   gap: 0.5rem;
