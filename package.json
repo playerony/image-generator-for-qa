@@ -27,7 +27,8 @@
     "start": "vite --open --mode ssr",
     "test": "vitest",
     "test.coverage": "vitest --coverage",
-    "qwik": "qwik"
+    "qwik": "qwik",
+    "cypress.open": "cypress open"
   },
   "devDependencies": {
     "@builder.io/qwik": "^1.7.1",
@@ -40,6 +41,7 @@
     "@typescript-eslint/parser": "^7.7.1",
     "@vitest/coverage-v8": "^2.0.5",
     "clsx": "^2.1.1",
+    "cypress": "^13.13.3",
     "eslint": "^8.57.0",
     "eslint-plugin-qwik": "^1.7.1",
     "prettier": "^3.2.5",
