@@ -68,10 +68,6 @@ const ASPECT_RATIOS = [
     value: JSON.stringify({ width: 1.66, height: 1 }),
   },
   {
-    label: "Super 16mm film (1.66:1)",
-    value: JSON.stringify({ width: 1.66, height: 1 }),
-  },
-  {
     label: "IMAX (1.43:1)",
     value: JSON.stringify({ width: 1.43, height: 1 }),
   },
