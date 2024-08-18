@@ -30,8 +30,8 @@ export const rescaleValuesForNewOutputSize = ({
     newWidthOutput = newHeightOutput * aspectRatioScalar;
   }
 
-  newWidthOutput = roundNumberDecimalPlaces(newWidthOutput, 0) || 1;
-  newHeightOutput = roundNumberDecimalPlaces(newHeightOutput, 0) || 1;
+  newWidthOutput = roundNumberDecimalPlaces(newWidthOutput, 0) || 2;
+  newHeightOutput = roundNumberDecimalPlaces(newHeightOutput, 0) || 2;
 
   return {
     width: newWidthOutput,
