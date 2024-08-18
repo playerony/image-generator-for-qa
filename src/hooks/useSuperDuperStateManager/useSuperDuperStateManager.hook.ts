@@ -28,7 +28,7 @@ export const useSuperDuperStateManager = () => {
       if (!(event.target instanceof HTMLInputElement)) return;
 
       const inputValue = Number(event.target.value);
-      if (isNaN(inputValue) || inputValue < 1) {
+      if (isNaN(inputValue) || inputValue < 10) {
         event.target.value = String(formState[dimensionType]);
         return;
       }

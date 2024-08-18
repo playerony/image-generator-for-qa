@@ -55,6 +55,8 @@ const Home = component$(() => {
       <div class="image-generator__dimension-inputs">
         <div class="image-generator__input-group">
           <input
+            min="10"
+            step="1"
             id="width"
             type="number"
             value={formState.width}
@@ -68,6 +70,8 @@ const Home = component$(() => {
         </div>
         <div class="image-generator__input-group">
           <input
+            min="10"
+            step="1"
             id="height"
             type="number"
             value={formState.height}
@@ -82,6 +86,8 @@ const Home = component$(() => {
       </div>
       <div class="image-generator__input-group">
         <input
+          min="0.1"
+          step="0.01"
           type="number"
           id="output-size"
           value={formState.outputSize}
