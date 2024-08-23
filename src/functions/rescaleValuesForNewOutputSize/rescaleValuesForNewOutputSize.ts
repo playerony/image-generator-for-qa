@@ -1,7 +1,7 @@
-import { roundNumberDecimalPlaces } from "../roundNumberDecimalPlaces/roundNumberDecimalPlaces.function";
-import { calculateAspectRatioScalar } from "../calculateAspectRatioScalar/calculateAspectRatioScalar.function";
-import { calculatePixelsFromMegabytes } from "../calculatePixelsFromMegabytes/calculatePixelsFromMegabytes.function";
-import { calculateMegabytesFromPixels } from "../calculateMegabytesFromPixels/calculateMegabytesFromPixels.function";
+import { roundNumberDecimalPlaces } from "../roundNumberDecimalPlaces/roundNumberDecimalPlaces";
+import { calculateAspectRatioScalar } from "../calculateAspectRatioScalar/calculateAspectRatioScalar";
+import { calculatePixelsFromMegabytes } from "../calculatePixelsFromMegabytes/calculatePixelsFromMegabytes";
+import { calculateMegabytesFromPixels } from "../calculateMegabytesFromPixels/calculateMegabytesFromPixels";
 
 import type { ImageGeneratorState } from "~/interfaces";
 import type { RescaleValuesForNewOutputSizeParams } from "./rescaleValuesForNewOutputSize.types";

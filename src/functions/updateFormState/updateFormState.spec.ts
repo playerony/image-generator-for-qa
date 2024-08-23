@@ -1,11 +1,11 @@
 import { Mock, beforeEach, describe, it, vi } from 'vitest';
 
-import { rescaleValuesForNewDimensions } from '../rescaleValuesForNewDimensions/rescaleValuesForNewDimensions.function';
-import { rescaleValuesForNewOutputSize } from '../rescaleValuesForNewOutputSize/rescaleValuesForNewOutputSize.function';
-import { updateFormState } from './updateFormState.function';
+import { rescaleValuesForNewDimensions } from '../rescaleValuesForNewDimensions/rescaleValuesForNewDimensions';
+import { rescaleValuesForNewOutputSize } from '../rescaleValuesForNewOutputSize/rescaleValuesForNewOutputSize';
+import { updateFormState } from './updateFormState';
 
-vi.mock('../rescaleValuesForNewDimensions/rescaleValuesForNewDimensions.function');
-vi.mock('../rescaleValuesForNewOutputSize/rescaleValuesForNewOutputSize.function');
+vi.mock('../rescaleValuesForNewDimensions/rescaleValuesForNewDimensions');
+vi.mock('../rescaleValuesForNewOutputSize/rescaleValuesForNewOutputSize');
 
 describe('updateFormState', () => {
   const defaultFormState = {

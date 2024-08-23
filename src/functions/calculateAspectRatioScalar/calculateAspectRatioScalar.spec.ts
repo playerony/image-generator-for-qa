@@ -1,6 +1,6 @@
 import { it, describe } from 'vitest';
 
-import { calculateAspectRatioScalar } from './calculateAspectRatioScalar.function'
+import { calculateAspectRatioScalar } from './calculateAspectRatioScalar'
 
 describe('calculateAspectRatioScalar', () => {
   it('should return the correct aspect ratio scalar', ({ expect }) => {

@@ -2,7 +2,7 @@ import { Mock, beforeEach, describe, it, vi } from 'vitest';
 import { SINGLE_CHUNK_SIZE } from '~/constants';
 
 import { createAndFillPng } from '../createAndFillPng/createAndFillPng';
-import { generateImageBlob } from './generateImageBlob.function';
+import { generateImageBlob } from './generateImageBlob';
 
 vi.mock('../createAndFillPng/createAndFillPng');
 

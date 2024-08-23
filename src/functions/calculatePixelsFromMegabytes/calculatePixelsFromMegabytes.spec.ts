@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 
-import { calculatePixelsFromMegabytes } from './calculatePixelsFromMegabytes.function'
+import { calculatePixelsFromMegabytes } from './calculatePixelsFromMegabytes'
 
 describe('calculatePixelsFromMegabytes', () => {
   it('should round a number to the correct number of decimal places', ({ expect }) => {

@@ -1,1 +1,1 @@
-export * from "./useSuperDuperStateManager/useSuperDuperStateManager.hook";
+export * from "./useSuperDuperStateManager/useSuperDuperStateManager";

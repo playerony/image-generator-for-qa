@@ -1,5 +1,5 @@
-import { rescaleValuesForNewDimensions } from "../rescaleValuesForNewDimensions/rescaleValuesForNewDimensions.function";
-import { rescaleValuesForNewOutputSize } from "../rescaleValuesForNewOutputSize/rescaleValuesForNewOutputSize.function";
+import { rescaleValuesForNewDimensions } from "../rescaleValuesForNewDimensions/rescaleValuesForNewDimensions";
+import { rescaleValuesForNewOutputSize } from "../rescaleValuesForNewOutputSize/rescaleValuesForNewOutputSize";
 
 import type { UpdateFormStateParams } from "./updateFormState.types";
 

@@ -1,4 +1,4 @@
-import { roundNumberDecimalPlaces } from "../roundNumberDecimalPlaces/roundNumberDecimalPlaces.function";
+import { roundNumberDecimalPlaces } from "../roundNumberDecimalPlaces/roundNumberDecimalPlaces";
 
 export const calculateMegabytesFromPixels = (
   pixels: number,

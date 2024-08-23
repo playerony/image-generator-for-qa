@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 
-import { roundNumberDecimalPlaces } from './roundNumberDecimalPlaces.function'
+import { roundNumberDecimalPlaces } from './roundNumberDecimalPlaces'
 
 describe('roundNumberDecimalPlaces', () => {
   it('should round a number to the correct number of decimal places', ({ expect }) => {

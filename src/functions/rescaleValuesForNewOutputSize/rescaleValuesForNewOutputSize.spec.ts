@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 
-import { rescaleValuesForNewOutputSize } from './rescaleValuesForNewOutputSize.function'
+import { rescaleValuesForNewOutputSize } from './rescaleValuesForNewOutputSize'
 
 describe('rescaleValuesForNewOutputSize', () => {
   it('should return the correct state', ({ expect }) => {
