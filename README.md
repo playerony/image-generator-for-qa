@@ -8,3 +8,7 @@ I created this image generator to be able to get an image with the desired image
 
 - QWIK to have perfect SEO,
 - PNGJS to handle gracefully image generation,
+
+## Important node
+
+Technically it's using a web worker to prevent blocking the main threat and it will always download every image immediately because they are generated locally on your computer.
